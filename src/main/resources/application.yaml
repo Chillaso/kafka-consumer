@@ -1,0 +1,16 @@
+application:
+  instanceName: dev
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          defaultBrokerPort: 29092
+      bindings:
+        process-in-0: # Name 'process' is the name of my function annotated with @Bean
+          destination: private_poc_kafka_fast_consumer_batchin_${application.instanceName}
+          group: poc_kafka_fast_consumer_batchin_consumergroup_${application.instanceName}
+          consumer:
+            batch-mode: true
+        process-out-0:
+          destination: private_poc_kafka_fast_consumer_batchout_${application.instanceName}
